@@ -7,7 +7,8 @@ import {
   Input,
   Upload,
   Space,
-  Select
+  Select,
+  message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import ReactQuill from 'react-quill'
@@ -34,14 +35,16 @@ const Publish = () => {
 
   // 提交表单
   const onFinish = (formValue) => {
+    // 校验封面类型imageType是否和实际的图片列表imageList数量是相等的
+    if (imageList.length !== imageType) return message.warning('封面类型和图片数量不匹配')
     const {title, content, channel_id} = formValue
     // 1.按照接口文档的格式处理收集到的表单数据
     const reqData = {
       title,
       content,
       cover: {
-        type: 0,
-        images: []
+        type: imageType,  //当前封面模式
+        images: imageList.map(item => item.response.data.url)  //图片列表
       },
       channel_id
     }
