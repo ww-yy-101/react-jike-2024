@@ -13,7 +13,7 @@ const BarChart =({title}) => {
     // const chartDom = document.getElementById('main')
     const chartDom = chartRef.current
 
-    // 2.图标初始化生成图表实例对象
+    // 2.图表初始化生成图表实例对象
     const myChart = echarts.init(chartDom)
 
     // 3.准备图表参数
@@ -37,7 +37,7 @@ const BarChart =({title}) => {
     };
     // 4.使用图表参数完成图表的渲染
     option && myChart.setOption(option)
-  }, [])
+  }, [title])
   return <div ref={chartRef} id='main' style={{ width: '500px', height: '400px' }}></div>
 }
 
