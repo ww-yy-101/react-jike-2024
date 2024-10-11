@@ -86,7 +86,7 @@ const Article = () => {
     }
   ]
   // 准备表格body数据
-  const data = [
+  /**const data = [
     {
       id: '8218',
       comment_count: 0,
@@ -99,7 +99,7 @@ const Article = () => {
       status: 2,
       title: 'wkwebview离线化加载h5资源解决方案'
     }
-  ]
+  ]**/
 
    // 筛选功能
   // 1.准备参数
