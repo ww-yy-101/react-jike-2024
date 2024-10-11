@@ -16,7 +16,7 @@ import 'react-quill/dist/quill.snow.css'
 import { Link, useSearchParams } from 'react-router-dom'
 import './index.scss'
 import { useEffect, useState } from 'react'
-import { createArticleAPI, getArticleById } from '@/apis/article'
+import { createArticleAPI, getArticleById, updateArticleAPI } from '@/apis/article'
 import { useChannel } from '@/hooks/useChannel'
 
 const { Option } = Select
@@ -36,12 +36,26 @@ const Publish = () => {
       content,
       cover: {
         type: imageType,  //当前封面模式
-        images: imageList.map(item => item.response.data.url)  //图片列表
+        // 这里的url处理逻辑只是在新增时候的逻辑 
+        // 编辑的时候需要做处理
+        images: imageList.map(item => {
+          if (item.response) {
+            return item.response.data.url  //图片列表
+          }else {
+            return item.url
+          }
+        })
       },
       channel_id
     }
     // 2.调用接口提交
-    createArticleAPI(reqData)
+    // 处理调用不同的接口 新增 - 新增接口 编辑状态 - 更新接口 id
+    if (articleId) {
+      // 更新接口
+      updateArticleAPI({...reqData, id: articleId})
+    }else{
+      createArticleAPI(reqData)
+    }
   }
 
   // 上传回调

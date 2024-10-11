@@ -20,6 +20,15 @@ export function createArticleAPI(data) {
   })
 }
 
+// 更新文章表单
+export function updateArticleAPI(data) {
+  return request({
+    url: `/mp/articles/${data.id}?draft=false`,
+    method: 'PUT',
+    data
+  })
+}
+
 // 获取文章列表
 
 export function getArticleListAPI(params) {
