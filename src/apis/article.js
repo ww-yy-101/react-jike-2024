@@ -43,6 +43,6 @@ export function delArticleAPI(id) {
 
 export function getArticleById (id) {
   return request({
-    url: `/mp/article/${id}`
+    url: `/mp/articles/${id}`
   })
 }
